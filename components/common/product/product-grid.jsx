@@ -25,8 +25,6 @@ function ProductGrid({
   const [pageCount, setPageCount] = useState(0);
   const [itemOffset, setItemOffset] = useState(0);
 
-  console.log(items);
-
   useEffect(() => {
     const endOffset = itemOffset + itemsPerPage;
     setCurrentItems(items?.slice(itemOffset, endOffset));
@@ -55,9 +53,7 @@ function ProductGrid({
 
   const handleImgError = (e) => {
     e.target.src = "/assets/img/shop/error/no-image.png";
-  }
-  
-  console.log(currentItems);
+  };
 
   const router = useRouter();
   const category = router.query.category;
@@ -73,7 +69,11 @@ function ProductGrid({
                   href={`/product-details/${category}/${product.product_id}`}
                 >
                   <a className="w-img">
-                  <img src={product.image} alt="product-img" onError={handleImgError}/>
+                    <img
+                      src={product.image}
+                      alt="product-img"
+                      onError={handleImgError}
+                    />
                     {product.thumb_img && (
                       <img
                         className="product__thumb-2"

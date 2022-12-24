@@ -14,7 +14,7 @@ import {
   useRecoilState,
   useRecoilValue,
 } from "recoil";
-import jwtState from "../../../states/jwt";
+import { jwtState } from "../../../states/store";
 
 async function login(email, password) {
   const options = {
@@ -45,7 +45,7 @@ const LoginForm = () => {
     const res = await login(values.email, values.password);
     document.cookie = `Authorization=${res.Authorization}`;
     setJwt(res.Authorization);
-    router.push("/");
+    router.push("/shop/top");
     // resetForm();
   };
   // use formik

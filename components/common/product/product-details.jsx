@@ -14,7 +14,7 @@ import ProductModal from "../modal/product-modal";
 import { add_to_wishlist } from "../../../redux/features/wishlist-slice";
 import { useRouter } from "next/router";
 import axios from "axios";
-import jwtState from "../../../states/jwt";
+import { jwtState } from "../../../states/store";
 import { useRecoilState } from "recoil";
 
 async function getReviews(category, id, jwt) {

@@ -1,19 +1,19 @@
 const nav_menus = [
-  {
-    link: "/",
-    title: "Home",
-    hasDropdown: true,
-    megamenu: false,
-    dropdownItems: [
-      { link: "/", title: "Home" },
-      // { link: '/home-2', title: 'Home Style 2' },
-      // { link: '/home-3', title: 'Home Style 3' },
-      // { link: '/home-4', title: 'Home Style 4' },
-      // { link: '/home-5', title: 'Home Style 5' },
-      // { link: '/home-6', title: 'Home Style 6' },
-      // { link: '/home-7', title: 'Home Style 7' },
-    ],
-  },
+  // {
+  //   link: "/",
+  //   title: "Home",
+  //   hasDropdown: true,
+  //   megamenu: false,
+  //   dropdownItems: [
+  //     { link: "/", title: "Home" },
+  //     { link: '/home-2', title: 'Home Style 2' },
+  //     { link: '/home-3', title: 'Home Style 3' },
+  //     { link: '/home-4', title: 'Home Style 4' },
+  //     { link: '/home-5', title: 'Home Style 5' },
+  //     { link: '/home-6', title: 'Home Style 6' },
+  //     { link: '/home-7', title: 'Home Style 7' },
+  //   ],
+  // },
   {
     link: "/shop",
     title: "Shop",
@@ -82,19 +82,19 @@ const nav_menus = [
     hasDropdown: true,
     megamenu: false,
     dropdownItems: [
-      { link: "/wishlist", title: "Wishlist" },
-      { link: "/cart", title: "Shopping Cart" },
-      { link: "/checkout", title: "Checkout" },
+      // { link: "/wishlist", title: "Wishlist" },
+      // { link: "/cart", title: "Shopping Cart" },
+      // { link: "/checkout", title: "Checkout" },
       { link: "/register", title: "Register" },
       { link: "/login", title: "Login" },
-      { link: "/404", title: "Error 404" },
+      // { link: "/404", title: "Error 404" },
     ],
   },
 
-  {
-    link: "/contact",
-    title: "Contact",
-  },
+  // {
+  //   link: "/contact",
+  //   title: "Contact",
+  // },
 ];
 
 export default nav_menus;

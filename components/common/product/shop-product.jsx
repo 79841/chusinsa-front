@@ -9,8 +9,9 @@ import ShopSidebar from "./shop-sidebar";
 
 import axios from "axios";
 import { useRouter } from "next/router";
-import jwtState from "../../../states/jwt";
-import { useRecoilState } from "recoil";
+import { jwtState } from "../../../states/store";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { categoryState } from "../../../states/store";
 
 const nav_tabs = [
   { id: "grid", active: true, icon: "fas fa-th" },
@@ -25,14 +26,11 @@ async function getProducts(category, jwt) {
       Authorization: jwt,
     },
   };
-  // console.log(options);
   try {
     const response = await axios(options);
-    console.log(response.data);
     // return response.data;
     return response.data;
   } catch (error) {
-    console.log(error);
     return error;
   }
 }
@@ -48,11 +46,9 @@ async function getRecommendProducts(category, jwt) {
 
   try {
     const response = await axios(options);
-    console.log(response.data);
     // return response.data;
     return response.data;
   } catch (error) {
-    console.log(error);
     return error;
   }
 }
@@ -60,35 +56,24 @@ async function getRecommendProducts(category, jwt) {
 const ShopProduct = ({ shop_right }) => {
   const [jwt, setJwt] = useRecoilState(jwtState);
   const router = useRouter();
-  const [category, setCategory] = useState(router.query.category);
-  console.log("test");
-  console.log(router.query);
-
+  const category = useRecoilValue(categoryState);
   const [items, setItems] = useState([]);
   const [loadCheck, setLoadCheck] = useState(0);
-  // useEffect(() => {
-  async function fetchData(category) {
-    // if (!items) {
-    if (category === "top" || category === "pants") {
-      const res = await getProducts(category, jwt);
-      setItems(res);
-      console.log(res);
-    } else if (category === "rtop" || category === "rpants") {
-      const res = await getRecommendProducts(category, jwt);
-      setItems(res);
-      console.log(res);
+
+  useEffect(() => {
+    async function fetchData(category) {
+      if (category === "top" || category === "pants") {
+        const res = await getProducts(category, jwt);
+        setItems(res);
+      } else if (category === "rtop" || category === "rpants") {
+        const res = await getRecommendProducts(category, jwt);
+        setItems(res);
+      }
     }
 
-    // console.log(res);
-    // }
-  }
-  if (category !== router.query.category) {
-    setCategory(router.query.category);
-    fetchData(router.query.category);
-  }
-  // }, []);
+    fetchData(category);
+  }, [category]);
 
-  // console.log(items);
   // const { items, handleSelectChange } = useGlobalContext();
   const { handleSelectChange } = useGlobalContext();
   const [showing, setShowing] = useState(0);
@@ -97,8 +82,6 @@ const ShopProduct = ({ shop_right }) => {
   const allProducts = useSelector(selectProducts)
     .map((item) => item.product)
     .flat();
-  // console.log(items);
-  // console.log(allProducts);
 
   const handleActive = (list) => {
     setIsActive(list);
@@ -126,14 +109,14 @@ const ShopProduct = ({ shop_right }) => {
                     </div>
                   </div>
                   <div className="shop__header-right d-flex align-items-center justify-content-between justify-content-sm-end">
-                    <div className="sort-wrapper mr-30 pr-25 p-relative">
+                    {/* <div className="sort-wrapper mr-30 pr-25 p-relative">
                       <select onChange={handleSelectChange}>
                         <option defaultValue="1">Default Sorting</option>
                         <option defaultValue="2">Short by new</option>
                         <option defaultValue="3">Short by featured</option>
                         <option defaultValue="4">Short by price</option>
                       </select>
-                    </div>
+                    </div> */}
                     <ul className="nav nav-pills" id="pills-tab" role="tablist">
                       {nav_tabs.map((tab, i) => {
                         return (
@@ -153,7 +136,7 @@ const ShopProduct = ({ shop_right }) => {
                               aria-controls={`pills-${tab.id}`}
                               aria-selected={tab.active ? "true" : "false"}
                             >
-                              <i className={tab.icon}></i>
+                              {/* <i className={tab.icon}></i> */}
                             </a>
                           </li>
                         );
